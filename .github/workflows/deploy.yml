@@ -1,48 +1,24 @@
-name: Build and Deploy
+name: Trigger site rebuild
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
+    branches: [main]
+    tags:
       - '*'
 
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  trigger-site-rebuild:
+    name: Docs
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install the dependencies
+      - name: Trigger docs site rebuild
+        if: github.ref == 'refs/heads/main'
         run: |
-          python -m pip install -r requirements.txt
-      - name: Build the JupyterLite site
-        run: |
-          cp README.md content
-          jupyter lite build --contents content --output-dir dist
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          curl -X POST https://api.github.com/repos/tskit-dev/tskit-site/dispatches \
+                    -H 'Accept: application/vnd.github.everest-preview+json' \
+                    -u AdminBot-tskit:${{ secrets.ADMINBOT_TOKEN }} \
+                    --data '{"event_type":"build-docs"}'
