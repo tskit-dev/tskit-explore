@@ -66,6 +66,7 @@
 .jp-LauncherCard-label {
   font-size: 14px;
   font-weight: 500;
+  padding: 0 !important;
   color: var(--jp-ui-font-color0);
 }
 
@@ -163,7 +164,7 @@
   text-overflow: ellipsis;
 }
 
-.jp-LauncherCard-description {
+.tskit-card .jp-LauncherCard-description {
   color: #6c757d;
   font-size: 0.9rem;
   text-align: left;
@@ -186,4 +187,112 @@
 
 .lm-TabBar-addButton {
     display: none !important;
+}
+
+.tskit-update-warning {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tskit-warning-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tskit-warning-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.tskit-warning-text {
+  flex-grow: 1;
+}
+
+.tskit-warning-text strong {
+  color: #856404;
+  font-size: 14px;
+}
+
+.tskit-warning-text p {
+  margin: 4px 0 0 0;
+  color: #856404;
+  font-size: 13px;
+}
+
+.tskit-reset-button {
+  background: linear-gradient(135deg, #204e66 0%, #1a3d52 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 8px rgba(32, 78, 102, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tskit-reset-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.tskit-reset-button:hover {
+  background: linear-gradient(135deg, #1a3d52 0%, #204e66 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(32, 78, 102, 0.4);
+}
+
+.tskit-reset-button:hover::before {
+  left: 100%;
+}
+
+.tskit-reset-button:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 5px rgba(32, 78, 102, 0.3);
+}
+
+.tskit-launcher {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tskit-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tskit-logo {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.tskit-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tskit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.tskit-card-content {
+  flex-grow: 1;
 }
