@@ -1,0 +1,9 @@
+{
+  "LiteBuildConfig": {
+    "contents": ["content"],
+    "output_dir": "dist"
+  },
+  "FederatedExtensionAddon": {
+    "enabled_extensions": ["tskit_custom_jupyter_launcher"]
+  }
+}
