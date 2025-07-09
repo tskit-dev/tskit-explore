@@ -1,5 +1,5 @@
 #!/bin/bash -e
-
+python fix_jupyterlite_html.py content
 cd tskit-launcher/
 jlpm install
 jlpm run build
