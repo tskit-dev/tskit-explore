@@ -62,7 +62,7 @@ class CustomLauncher extends Widget implements ILauncher {
 
           <div class="jp-Launcher-section">
             <div class="jp-Launcher-sectionHeader">
-              <h2>Section heading</h2>
+              <h2>Example notebooks</h2>
             </div>
             <div class="jp-Launcher-cardContainer">
               <div class="jp-LauncherCard tskit-card" id="tskit-notebook">
@@ -77,6 +77,19 @@ class CustomLauncher extends Widget implements ILauncher {
                 </div>
               </div>
             </div>
+            <div class="jp-Launcher-cardContainer">
+              <div class="jp-LauncherCard tskit-card" id="sc2ts-notebook">
+                <div class="jp-LauncherCard-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="#204e66"/>
+                  </svg>
+                </div>
+                <div class="tskit-card-content">
+                  <div class="jp-LauncherCard-label">Open sc2ts examples</div>
+                  <div class="jp-LauncherCard-description">Explore the sc2ts dataset</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -87,11 +100,19 @@ class CustomLauncher extends Widget implements ILauncher {
   }
 
   private setupEventHandlers(): void {
-    const notebookCard = this.node.querySelector('#tskit-notebook');
-    if (notebookCard) {
-      notebookCard.addEventListener('click', () => {
+    const tskitNotebookCard = this.node.querySelector('#tskit-notebook');
+    if (tskitNotebookCard) {
+      tskitNotebookCard.addEventListener('click', () => {
         this.app?.commands.execute('docmanager:open', {
           path: 'tskit.ipynb'
+        });
+      });
+    }
+    const sc2tsNotebookCard = this.node.querySelector('#sc2ts-notebook');
+    if (sc2tsNotebookCard) {
+      sc2tsNotebookCard.addEventListener('click', () => {
+        this.app?.commands.execute('docmanager:open', {
+          path: 'sc2ts.ipynb'
         });
       });
     }
