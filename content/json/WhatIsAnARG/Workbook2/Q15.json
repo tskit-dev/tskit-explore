@@ -1,0 +1,16 @@
+[{
+    "question": "After completely deleting unknowable nodes, what is the ID of the node with 3 children in the ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 22, "correct": true, "feedback": "Correct. However, note that it still only has 2 children in any one local tree"},
+        {"type": "value", "value": 36, "correct": false, "feedback": "That's the old node ID: you need to simplify without the filter_nodes=False option"},
+        {"type": "default"}
+    ]}, {
+    "question": "After completely deleting unknowable nodes, what is the ID of the node with 3 parents in the ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 19, "correct": true, "feedback": "Correct. However, note that it's still the case that all nodes only have one parent in any local tree"},
+        {"type": "value", "value": 22, "correct": false, "feedback": "That's the old node ID: you need to simplify without the filter_nodes=False option"},
+        {"type": "default"}
+    ]
+}]

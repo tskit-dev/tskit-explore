@@ -1,0 +1,23 @@
+[{
+    "question": "Compared to the partially simplified ARG, has the number of EDGES in the fully simplified ARG increased, decreased, or stayed the same?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Increased", "correct": true, "feedback": "Correct: full simplification can actually increase the number of ARG edges"},
+        {"answer": "Decreased", "correct": false},
+        {"answer": "Stayed the same", "correct": false}
+    ]}, {
+    "question": "Compared to the partially simplified ARG, has the number of NODES in the fully simplified ARG increased, decreased, or stayed the same?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Increased", "correct": false},
+        {"answer": "Decreased", "correct": false},
+        {"answer": "Stayed the same", "correct": true, "feedback": "Correct: we have not deleted any nodes from the ARG, simply bypassed them if they appear unary in a local tree"}
+    ]}, {
+    "question": "Compared to the partially simplified ARG, has the number of MUTATIONS in the fully simplified ARG increased, decreased, or stayed the same?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Increased", "correct": false},
+        {"answer": "Decreased", "correct": false},
+        {"answer": "Stayed the same", "correct": true,  "feedback": "Correct, simplification doesn't change the pattern of encoded variation"}
+    ]
+}]

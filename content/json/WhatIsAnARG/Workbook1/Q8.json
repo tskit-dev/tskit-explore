@@ -1,0 +1,8 @@
+[{
+    "question": "One of the sites has two mutations. Can you identify the position of that site by looking at both the tree-by-tree and the interactive ARG plot?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 5, "correct": true, "feedback": "Yes (coincidentally this is the first position)"},
+        {"type": "default", "feedback": "Hint: duplicate mutations will simultaneously be highlighted when hovering over them in the visualizer"}
+    ]
+}]

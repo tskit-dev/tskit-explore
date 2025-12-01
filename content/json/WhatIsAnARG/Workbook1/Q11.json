@@ -1,0 +1,11 @@
+[{
+    "question": "What is the interpretation of the genetic diversity, π in terms of branch lengths?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "The average time of all internal nodes", "correct": false},
+        {"answer": "Twice the average TMRCA between all pairs of samples", "correct": true},
+        {"answer": "The average branch lengths between all pairs of samples", "correct": true},
+        {"answer": "The span-weighted average branch length of the local trees", "correct": false,
+        "feedback": "This is the equivalent of the number of segregating sites (under the infinite-sites model)"}
+    ]
+}]

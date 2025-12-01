@@ -1,0 +1,11 @@
+[{
+    "question": "How does the size of the inferred part_coalescent_arg compare to the all-coalescent (fully simplified) ARG?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "It much bigger", "correct": false},
+        {"answer": "It is about twice the size", "correct": false},
+        {"answer": "It is about the same size", "correct": false},
+        {"answer": "It is about half the size", "correct": true},
+        {"answer": "It is much smaller", "correct": false}
+    ]
+}]

@@ -1,0 +1,8 @@
+[{
+    "question": "What genomic span is passed on to sample node 6 through the route via node 15? The span is the total length of the genome region passed on (i.e. the right minus the left position)",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 930, "correct": true, "feedback": "Yes, it covers positions 0 to 930."},
+        {"type": "default", "feedback": "Try hovering over the edges below node 15."}
+    ]
+}]

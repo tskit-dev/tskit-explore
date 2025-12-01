@@ -1,0 +1,15 @@
+[{
+    "question": "Which population has the highest diversity levels along the genome?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "central", "correct": true},
+        {"answer": "western", "correct": false},
+        {"answer": "bonobo", "correct": false},
+    ]}, {
+    "question": "Does the diversity vary across the genome in any of the populations?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "No", "correct": true, "feedback": "Correct: this is a neutral simulation with constant mutation rate, so we would not expect systematic variation in diversity across the genome."},
+        {"answer": "Yes", "correct": false}
+    ]
+}]

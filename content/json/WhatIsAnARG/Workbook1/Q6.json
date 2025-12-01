@@ -1,0 +1,8 @@
+[{
+    "question": "In the population-coloured ARG plot, what colour do you think represents nodes from the African population",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "green", "correct": true, "feedback": "Yes, the deepest divergences are African: in fact, even between the European genomes, some coalescences trace back into Africa"},
+        {"answer": "blue", "correct": false},
+    ]
+}]

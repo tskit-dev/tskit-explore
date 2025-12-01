@@ -1,0 +1,33 @@
+[{
+    "question": "What percentage of the nodes in the 1000 sample + 10 megabase full ARG are non-coalescent ('unknowable')?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "0% - 5%", "correct": false},
+        {"answer": "5% - 10%", "correct": false},
+        {"answer": "10% - 25%", "correct": false},
+        {"answer": "25% - 50%", "correct": false},
+        {"answer": "50% - 70%", "correct": false},
+        {"answer": "75% - 90%", "correct": false},
+        {"answer": "90% - 95%", "correct": false},
+        {"answer": "95% - 100%", "correct": true}
+    ]}, {
+    "question": "Roughly what fraction of the nodes are recombination nodes?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "1/10", "correct": false},
+        {"answer": "1/3", "correct": false},
+        {"answer": "1/2", "correct": false},
+        {"answer": "2/3", "correct": true},
+        {"answer": "9/10", "correct": false}
+    ]}, {
+    "question": "Roughly how big is this 1000 sample + 10 megabase full ARG when stored in tskit?",
+    "type": "numeric",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "~1 GB", "correct": false},
+        {"answer": "~250 MB", "correct": true},
+        {"answer": "~25 MB", "correct": false},
+        {"answer": "~10 MB", "correct": false},
+        {"answer": "~5 MB", "correct": false}
+    ]
+}]

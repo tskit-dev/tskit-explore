@@ -1,0 +1,8 @@
+[{
+    "question": "(Hard!) Only one recombination event results in a tree that shows a new topological relationship between the samples. By looking at the graph and the local trees, can you identify which one it is? Enter its breakpoint position below:",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 930, "correct": true, "feedback": "Yes (coincidentally this is the last breakpoint)"},
+        {"type": "default", "feedback": "Hint: look at the breakpoints on the X axis of the tree-by-tree plot: which marks the transition between two differently shaped trees?"}
+    ]
+}]

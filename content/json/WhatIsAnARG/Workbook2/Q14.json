@@ -1,0 +1,28 @@
+[{
+    "question": "What has happened to the diamond and the other non-coalescent CA node?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "They have been bypassed entirely", "correct": true},
+        {"answer": "They have been kept", "correct": false},
+        {"answer": "They are now connected to other nodes", "correct": false}
+    ]}, {
+    "question": "Other than those cases, what has happened to the edges descending from the parents of the red recombination nodes?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "They now bypass the recombination node and link to the next (blue or green) node below", "correct": true},
+        {"answer": "They have been deleted entirely, and not replaced", "correct": false},
+        {"answer": "They have been shortened", "correct": false}
+    ]}, {
+    "question": "What is the largest number of parents of any node in the new ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 3, "correct": true, "feedback": "Correct: node 23 now represents where two recombination events have been collapsed into a single node below"},
+        {"type": "default"}
+    ]}, {
+    "question": "What is the largest number of children of any node in the new ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 3, "correct": true, "feedback": "Correct: the root node 36 now represents where two coalescent events have been collapsed into a single node above"},
+        {"type": "default"}
+    ]
+}]

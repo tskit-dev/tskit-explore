@@ -1,0 +1,8 @@
+[{
+    "question": "What is the name of the first individual (ID=0), as stored in the individual's metadata?",
+    "type": "string",
+    "answers": [
+        {"answer": "Bob", "correct": true, "match_case": false},
+        {"answer": "Eve", "correct": false, "match_case": false, "feedback": "Incorrect: remember, tskit uses a zero-based numbering system, so the first individual has ID=0, not ID=1"}
+    ]
+}]
