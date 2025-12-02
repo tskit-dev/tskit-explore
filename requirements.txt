@@ -1,11 +1,11 @@
 # Core modules (mandatory)
-jupyterlite-core==0.6.3
+jupyterlite-core>=0.7,<1
 jupyterlab~=4.4.3
 notebook~=7.4.3
 
 
 # Python kernel (optional)
-jupyterlite-pyodide-kernel==0.6.1
+jupyterlite-pyodide-kernel>=0.7,<1
 
 
 # JupyterLab: Fasta file renderer (optional)
