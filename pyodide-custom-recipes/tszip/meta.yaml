@@ -1,0 +1,26 @@
+package:
+  name: tszip
+  version: 0.2.6
+  tag:
+    - always
+  top-level:
+    - tszip
+
+source:
+  url: https://files.pythonhosted.org/packages/70/53/200fba914ebb68ac1f11897fafdb9523238eb0b0f1852529f4a59edcc2d2/tszip-0.2.6-py3-none-any.whl
+  sha256: 1f2a3568f87b28e7435ec881c49e7e3b9d98d1283b8cec9ca38537ab27ed70bb
+
+requirements:
+  run:
+    - numpy
+    - humanize
+    - tskit
+    - numcodecs
+    - zarr
+
+about:
+  home: https://tskit.dev/tszip
+  PyPI: https://pypi.org/project/tszip
+  summary: Compression utilities for tree sequences
+  license: MIT
+

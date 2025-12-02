@@ -18,6 +18,7 @@ THIS_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_PYODIDE_DIR="${THIS_REPO_ROOT}/static/pyodide"
 
 PYODIDE_RECIPES_DIR="${PYODIDE_RECIPES_DIR:-${THIS_REPO_ROOT}/_pyodide-recipes}"
+CUSTOM_RECIPES_DIR="${THIS_REPO_ROOT}/pyodide-custom-recipes"
 PYODIDE_ENV_NAME="${PYODIDE_ENV_NAME:-pyodide-env}"
 
 # By default we only ask pyodide-build to build the packages needed for
@@ -66,6 +67,20 @@ else
   git -C "${PYODIDE_RECIPES_DIR}" checkout main
   git -C "${PYODIDE_RECIPES_DIR}" pull --ff-only
   git -C "${PYODIDE_RECIPES_DIR}" submodule update --init --recursive
+fi
+
+echo
+echo "=== Applying custom recipe overrides (if any) ==="
+if [ -d "${CUSTOM_RECIPES_DIR}" ]; then
+  for pkg_dir in "${CUSTOM_RECIPES_DIR}"/*; do
+    [ -d "${pkg_dir}" ] || continue
+    pkg_name="$(basename "${pkg_dir}")"
+    echo "  - Overlaying recipe for ${pkg_name}"
+    mkdir -p "${PYODIDE_RECIPES_DIR}/packages/${pkg_name}"
+    cp -a "${pkg_dir}/." "${PYODIDE_RECIPES_DIR}/packages/${pkg_name}/"
+  done
+else
+  echo "  (No custom recipes found in ${CUSTOM_RECIPES_DIR})"
 fi
 
 cd "${PYODIDE_RECIPES_DIR}"
