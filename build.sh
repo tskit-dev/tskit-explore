@@ -1,9 +1,12 @@
 #!/bin/bash -e
-python fix_jupyterlite_html.py content
+python3 fix_jupyterlite_html.py content
 cd tskit-launcher/
-jlpm install
-jlpm run build
-pip install -e . 
+# Install JS dependencies and build the labextension without relying on jlpm.
+npm install
+
+npx tsc --sourceMap
+jupyter labextension build --development True .
+pip install -e .
 cd ..
 rm -rf dist 
 jupyter lite build --contents content --output-dir dist

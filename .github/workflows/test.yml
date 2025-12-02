@@ -13,6 +13,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Miniconda (for Pyodide world build)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-activate-base: true
+      - name: Install Rust (for Pyodide world build)
+        run: |
+          if ! command -v rustup >/dev/null 2>&1; then
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          fi
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -20,6 +30,9 @@ jobs:
       - name: Install the dependencies
         run: |
           python -m pip install -r requirements.txt
+      - name: Build the Pyodide world
+        run: |
+          ./build_pyodide_world.sh
       - name: Build the JupyterLite site
         run: |
           ./build.sh
