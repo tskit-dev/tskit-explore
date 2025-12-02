@@ -34,4 +34,28 @@ optional utilities and extensions to make the JupyterLite experience more enjoya
 
 For a template based on the Xeus kernel, see the [`jupyterlite/xeus-python-demo` repository](https://github.com/jupyterlite/xeus-python-demo)
 
+## Rebuilding Pyodide and packages from `pyodide-recipes`
+
+To rebuild a full Pyodide runtime plus all packages from the latest `pyodide-recipes`:
+
+1. Ensure you have `conda` and `rustup` (`rustup` must be on `PATH`).
+2. From the repo root, run:
+   ```bash
+   pyodide/build_world_from_recipes.sh
+   ```
+   This will:
+   - create or update a `pyodide-env` conda environment based on `pyodide-recipes/environment.yml`
+   - clone or update `pyodide-recipes` (by default into `_pyodide-recipes/`)
+   - use `pyodide build-recipes` to build all recipes and generate a `pyodide-lock.json`
+   - copy the resulting runtime, lock file, and wheels into this repo’s `pyodide/` directory
+3. Rebuild the site:
+   ```bash
+   ./build.sh
+   ```
+
+Environment variables:
+
+- `PYODIDE_RECIPES_DIR` – where to clone `pyodide-recipes` (default: `_pyodide-recipes` under the repo root).
+- `PYODIDE_ENV_NAME` – conda env name (default: `pyodide-env`).
+- `PYODIDE_RECIPES_TARGETS` – package selection string for `pyodide build-recipes` (default: `"*"` for all packages; e.g. `*,!imgui-bundle` to disable a problematic recipe).
 
