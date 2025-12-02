@@ -22,16 +22,18 @@ PYODIDE_ENV_NAME="${PYODIDE_ENV_NAME:-pyodide-env}"
 
 # By default we only ask pyodide-build to build the packages needed for
 # the sc2ts / tskit stack:
-#   - tskit and its dependencies
+#   - tskit and its dependencies (including msprime)
 #   - the numerical / plotting stack: numpy, scipy, pandas, matplotlib, bokeh
 #   - pysam for BAM/CRAM handling
+#   - numcodecs for tszip's compression backend
+#   - zarr + tszip + humanize so we can read/write .tsz files without micropip
 #   - core Pyodide helpers: micropip, pyodide-http, pyodide-unix-timezones
 #
 # pyodide-build will compute the full transitive dependency closure of
 # these roots. Additional packages (or a full world) can still be built
 # by overriding PYODIDE_RECIPES_TARGETS in the environment, e.g.:
 #   PYODIDE_RECIPES_TARGETS='*' ./build_pyodide_world.sh
-PYODIDE_RECIPES_TARGETS="${PYODIDE_RECIPES_TARGETS:-micropip,pyodide-http,pyodide-unix-timezones,tskit,numpy,scipy,pandas,matplotlib,bokeh,pysam}"
+PYODIDE_RECIPES_TARGETS="${PYODIDE_RECIPES_TARGETS:-micropip,pyodide-http,pyodide-unix-timezones,tskit,msprime,numpy,scipy,pandas,matplotlib,bokeh,pysam,numcodecs,zarr,humanize,tszip}"
 
 echo "=== Pyodide world rebuild ==="
 echo "Repo root           : ${THIS_REPO_ROOT}"
