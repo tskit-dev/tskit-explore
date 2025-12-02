@@ -1,0 +1,21 @@
+package:
+  name: zarr
+  version: 2.18.7
+  # Keep zarr on a 2.x release; zarr 3.x uses threading, which is not suitable for the Pyodide runtime.
+  pinned: true
+  top-level:
+    - zarr
+source:
+  sha256: ac3dc4033e9ae4e9d7b5e27c97ea3eaf1003cc0a07f010bd83d5134bf8c4b223
+  url: https://files.pythonhosted.org/packages/py3/z/zarr/zarr-2.18.7-py3-none-any.whl
+requirements:
+  run:
+    - numpy
+    - asciitree
+    - numcodecs
+about:
+  home: https://github.com/zarr-developers/zarr-python
+  PyPI: https://pypi.org/project/zarr
+  summary: An implementation of chunked, compressed, N-dimensional arrays for Python.
+  license: MIT
+

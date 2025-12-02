@@ -1,0 +1,27 @@
+package:
+  name: sc2ts
+  version: 1.0.1
+  top-level:
+    - sc2ts
+
+source:
+  url: https://files.pythonhosted.org/packages/7d/b7/763bfbd2a4bbaa810acdbffdb24acd4bcecacc2de0786f5f011a058b1005/sc2ts-1.0.1-py3-none-any.whl
+  sha256: 639ea91a515e7fd19914ecad3d2c6e36694b62f14e70fad45f24a832f409600b
+
+requirements:
+  run:
+    - tskit
+    - tszip
+    - pandas
+    - tqdm
+    - zarr
+    - click
+    - tomli
+    - humanize
+
+about:
+  home: https://tskit.dev/sc2ts
+  PyPI: https://pypi.org/project/sc2ts
+  summary: Infer ARGs for SARS-CoV-2 in tskit format
+  license: GPL-3.0-or-later
+
