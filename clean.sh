@@ -16,8 +16,13 @@ fi
 
 # Pyodide runtime + wheels copied from pyodide-recipes
 if [ -d "${ROOT_DIR}/pyodide" ]; then
-  echo "  - Removing pyodide/"
+  echo "  - Removing legacy pyodide/ (root-level)"
   rm -rf "${ROOT_DIR}/pyodide"
+fi
+
+if [ -d "${ROOT_DIR}/static/pyodide" ]; then
+  echo "  - Removing static/pyodide/"
+  rm -rf "${ROOT_DIR}/static/pyodide"
 fi
 
 # pyodide-recipes local build outputs (can always be regenerated)
