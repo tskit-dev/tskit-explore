@@ -1,0 +1,8 @@
+[{
+    "question": "From the log time plot, from when (in generations ago) does the exponential growth phase in both populations start model start, according to this model?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 200, "correct": true},
+        {"type": "default", "feedback": "Round to the nearest 100 generations"}
+    ]
+}]

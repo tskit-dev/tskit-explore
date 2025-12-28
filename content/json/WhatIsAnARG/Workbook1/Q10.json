@@ -1,0 +1,28 @@
+[{
+    "question": "In the ARG above, what mutation groups together samples 7, 8, and 9?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "C mutates to A at position 215", "correct": true},
+        {"answer": "A mutates to C at position 215", "correct": false, "feedback": "You have the position right, but the derived state is A."},
+        {"answer": "G mutates to T at position 92", "correct": false},
+        {"answer": "C mutates to G at position 560", "correct": false}
+    ]}, {
+    "question": "What ARG node does that mutation allow us to infer?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 16, "correct": true, "feedback": "Yes, it's the node below the mutation."},
+        {"type": "value", "value": 19, "correct": false, "feedback": "No, that node groups together more than 7, 8, and 9."}
+    ]},{
+    "question": "Do any mutations allow us to resolve the relationship between samples 4, 5, and 6?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "No", "correct": true, "feedback": "In fact, we can't even resolve the relative closeness of 4 versus 5 versus 6 to the (7,8,9) group"},
+        {"answer": "Yes", "correct": false}
+    ]}, {
+    "question": "How many mutations are uninformative about the structure (topology) of the ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 2, "correct": true, "feedback": "Yes, the two so-called singletons, immediately above node 3 and node 4."},
+        {"type": "default", "feedback": "Incorrect (hint: mutations above a single node do not group samples together)."}
+    ]
+}]

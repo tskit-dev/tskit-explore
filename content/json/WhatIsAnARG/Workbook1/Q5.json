@@ -1,0 +1,30 @@
+[{
+    "question": "How would you classify the recombination node(s) 20/21",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Non-coalescent / always unary", "correct": true, "feedback": "By construction, in a full ARG recombination nodes are never coalescent"},
+        {"answer": "Partially-coalescent / locally unary", "correct": false},
+        {"answer": "All-coalescent / never unary", "correct": false}
+    ]},{
+    "question": "How would you classify node 17",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Non-coalescent / always unary", "correct": false},
+        {"answer": "Part-coalescent / locally unary", "correct": false},
+        {"answer": "All-coalescent / never unary", "correct": true}
+    ]},{
+    "question": "How would you classify node 26",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Non-coalescent / always unary", "correct": true, "feedback": "Some 'common ancestor' nodes with 2 children in the full ARG never represent local coalescence"},
+        {"answer": "Part-coalescent / locally unary", "correct": false},
+        {"answer": "All-coalescent / never unary", "correct": false}
+    ]},{
+    "question": "How would you classify node 15",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Non-coalescent / always unary", "correct": false},
+        {"answer": "Part-coalescent / locally unary", "correct": true, "feedback": "It is only coalescent on the left side of the genome: it is unary to the right of position 930"},
+        {"answer": "All-coalescent / never unary", "correct": false}
+    ]
+}]

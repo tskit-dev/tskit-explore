@@ -1,0 +1,27 @@
+[{
+    "question": "Are any non-coalescent ('unknowable') nodes present?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Yes", "correct": false},
+        {"answer": "No", "correct": true}
+    ]}, {
+    "question": "Roughly how big is this 1000 sample + 10 megabase simplified ARG when stored in tskit?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "1 GB", "correct": false},
+        {"answer": "250 MB", "correct": false},
+        {"answer": "25 MB", "correct": false},
+        {"answer": "10 MB", "correct": true},
+        {"answer": "5 MB", "correct": false}
+    ]}, {
+    "question": "How much smaller is the all-coalescent ARG than the full ARG?",
+    "type": "numeric",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "~100 times smaller", "correct": false},
+        {"answer": "~25 times smaller", "correct": true, "feedback": "Correct. Notice that the full ARG has 25 times more nodes too."},
+        {"answer": "~10 times smaller", "correct": false},
+        {"answer": "~2 times smaller", "correct": false},
+        {"answer": "About the same size", "correct": false}
+    ]
+}]

@@ -1,0 +1,11 @@
+[{
+    "question": "Which of these random placement methods is most appropriate for choosing a node above which to place a neutral mutation?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "With probability proportional to the span of the edge above the node", "correct": false},
+        {"answer": "With equal probability above any node", "correct": false},
+        {"answer": "Simply above the node with the longest branch", "correct": false},
+        {"answer": "With probability proportional to the temporal length (evolutionary time) of the edge above the node", "correct": false},
+        {"answer": "With probability proportional to the area (span × temporal length) of the edge above the node", "correct": true}
+    ]
+}]

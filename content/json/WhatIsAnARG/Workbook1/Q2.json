@@ -1,0 +1,25 @@
+[{
+    "question": "What does SPR stand for?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Subtree Prune and Regraft", "correct": true},
+        {"answer": "Strand Pairing Resolution", "correct": false},
+        {"answer": "Single-Point Reversion", "correct": false},
+        {"answer": "Slippery Puzzle Reorganization", "correct": false, "feedback": "???."}
+    ]}, {
+    "question": "What is the TMRCA, or time to the most recent common ancestor (in generations) between nodes 0 and 9 at the left hand end of this ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 38472, "correct": true},
+        {"type": "value", "value": 31, "correct": false, "feedback": "That's the node ID. What time is associated with that node."},
+        {"type": "default", "feedback": "Try hovering over the last part of the genome, and looking at the axis labels."}
+    ]},{
+    "question": "What is the name of the structure in which two lineages split but immediately re-join, as seen just below node 26",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Diamond", "correct": true},
+        {"answer": "Loop", "correct": false},
+        {"answer": "Bubble", "correct": false, "feedback": "This term is sometimes used, but is not standard"},
+        {"answer": "Cycle", "correct": false}
+    ]
+}]

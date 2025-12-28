@@ -1,0 +1,32 @@
+[{
+    "question": "What colour are all-coalescent nodes in the graph above?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Green", "correct": true},
+        {"answer": "Blue", "correct": false},
+        {"answer": "Red", "correct": false},
+        {"answer": "Cyan", "correct": false},
+    ]},{
+    "question": "What colour are partly-coalescent nodes in the graph above?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Green", "correct": false},
+        {"answer": "Blue", "correct": true},
+        {"answer": "Red", "correct": false},
+        {"answer": "Cyan", "correct": false},
+    ]},{
+    "question": "What colour are non-coalescent CA nodes in the graph above?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Green", "correct": false},
+        {"answer": "Blue", "correct": false},
+        {"answer": "Red", "correct": false, "feedback": "Not quite: red nodes are indeed non-coalescent, but they are RE nodes"},
+        {"answer": "Cyan", "correct": true, "feedback": "Correct (the other non-coalescent nodes are the red RE nodes)"},
+    ]},{
+    "question": "Are non-coalescent CA event nodes always above a diamond?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "No", "correct": true, "feedback": "Node 35 is not above a diamond, and it is non-coalescent in every local tree in which it is seen."},
+        {"answer": "Yes", "correct": false},
+    ]
+}]

@@ -1,0 +1,27 @@
+[{
+    "question": "What is the allelic state of the sample with node ID 2 at position 5?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "A", "correct": false},
+        {"answer": "C", "correct": false},
+        {"answer": "G", "correct": false},
+        {"answer": "T", "correct": true}
+    ]}, {
+    "question": "What is the ancestral state at position 5?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "A", "correct": true},
+        {"answer": "C", "correct": false},
+        {"answer": "G", "correct": false},
+        {"answer": "T", "correct": false}
+    ]}, {
+    "question": "By looking at the ARG or tree visualizations, the mutation responsible for this state in sample 2 is above which node?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "12", "correct": false},
+        {"answer": "13", "correct": true},
+        {"answer": "31", "correct": false},
+        {"answer": "This allelic state is the ancestral state, so does not correspond to a mutation in the ARG ", "correct": false,
+        "feedback": "It is true that ancestral states are not represented by a mutation in the ARG, but the state C here is a derived state, so it *is* associated with a mutation"}
+    ]
+}]

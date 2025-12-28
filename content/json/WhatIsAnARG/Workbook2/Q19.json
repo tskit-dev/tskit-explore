@@ -1,0 +1,9 @@
+[{
+    "question": "In general, when you go backwards in time, does the span of an ancestral haplotype in an ARG increase, decrease, or stay about the same?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Span decreases (gets shorter)", "correct": true, "feedback": "Correct: older haplotypes will have gone through more recombination events, and so the genomic region passed to the current-day samples will have been whittled down in length"},
+        {"answer": "Span increases (gets longer)", "correct": false},
+        {"answer": "Span stays about the same", "correct": false}
+    ]
+}]

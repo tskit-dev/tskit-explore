@@ -1,0 +1,9 @@
+[{
+    "question": "Does this ARG with polytomies encode the same genetic data?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Yes: there is no change to the genetic data encoded", "correct": true},
+        {"answer": "No", "correct": false},
+        {"answer": "Sometimes", "correct": false},
+    ]
+}]

@@ -1,0 +1,8 @@
+[{
+    "question": "How many sites now have no mutations associated with them?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 1, "correct": true, "feedback": "Correct: the site at position 215 has no mutations."},
+        {"type": "default"}
+    ]
+}]

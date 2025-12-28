@@ -1,0 +1,13 @@
+[{
+    "question": "What, roughly, is the average genetic diversity (π) in the mutated ARG?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "Between 0 and 0.00001", "correct": false},
+        {"answer": "Between 0.00001 and 0.00002", "correct": false},
+        {"answer": "Between 0.00002 and 0.00003", "correct": true},
+        {"answer": "Between 0.00003 and 0.00004", "correct": false},
+        {"answer": "Between 0.00004 and 0.00005", "correct": false},
+        {"answer": "Between 0.00005 and 0.0001", "correct": false},
+        {"answer": "Greater than 0.0001", "correct": false}
+    ]
+}]

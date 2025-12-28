@@ -1,0 +1,14 @@
+[{
+    "question": "Previously, there were 7 local trees corresponding to 6 recombination breakpoints. How many breakpoints are now represented?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 5, "correct": true, "feedback": "Correct: the recombination at position 602, associated with the diamond, has been removed."},
+        {"type": "default"}
+    ]}, {
+    "question": "Previously we had 13 mutations at twelve sites. How many mutations are there in the simplified ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 13, "correct": true, "feedback": "Correct: simplification doesn't change the sites or the number / age of mutations"},
+        {"type": "default"}
+    ]
+}]

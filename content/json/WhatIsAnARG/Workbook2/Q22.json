@@ -1,0 +1,12 @@
+[{
+    "question": "By looking at the provenance commands, which simulation software was used to make this ARG?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "msprime", "correct": true},
+        {"answer": "SLiM", "correct": false},
+        {"answer": "fwdpy11", "correct": false},
+        {"answer": "simuPOP", "correct": false},
+        {"answer": "scrm", "correct": false},
+        {"answer": "fastsimcoal2", "correct": false},
+    ]
+}]

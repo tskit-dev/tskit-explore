@@ -1,0 +1,13 @@
+[{
+    "question": "In the simplified ARG, do we know the order of the two recombination events immediately above node 19",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "No", "correct": true},
+        {"answer": "Yes", "correct": false},
+    ]}, {
+    "question": "In the simplified ARG, do we know the order of the two coalescent events immediately below the root node 22",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "No", "correct": true},
+        {"answer": "Yes", "correct": false},
+    ]}]
