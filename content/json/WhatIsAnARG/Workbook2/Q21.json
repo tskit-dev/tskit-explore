@@ -4,6 +4,6 @@
     "answers": [
         {"answer": "Yes: there is no change to the genetic data encoded", "correct": true},
         {"answer": "No", "correct": false},
-        {"answer": "Sometimes", "correct": false},
+        {"answer": "Sometimes", "correct": false}
     ]
 }]

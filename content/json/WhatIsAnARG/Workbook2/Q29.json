@@ -4,6 +4,6 @@
     "answers": [
         {"answer": "The founding of the wester population at ~30,000 generations ago", "correct": true},
         {"answer": "A sudden increase in the western population size", "correct": false},
-        {"answer": "A sudden drop in the central population size", "correct": false},
+        {"answer": "A sudden drop in the central population size", "correct": false}
     ]
 }]

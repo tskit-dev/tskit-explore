@@ -4,7 +4,7 @@
     "answers": [
         {"answer": "central", "correct": true},
         {"answer": "western", "correct": false},
-        {"answer": "bonobo", "correct": false},
+        {"answer": "bonobo", "correct": false}
     ]}, {
     "question": "Does the diversity vary across the genome in any of the populations?",
     "type": "many_choice",

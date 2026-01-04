@@ -3,6 +3,6 @@
     "type": "many_choice",
     "answers": [
         {"answer": "green", "correct": true, "feedback": "Yes, the deepest divergences are African: in fact, even between the European genomes, some coalescences trace back into Africa"},
-        {"answer": "blue", "correct": false},
+        {"answer": "blue", "correct": false}
     ]
 }]
