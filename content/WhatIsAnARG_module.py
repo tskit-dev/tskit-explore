@@ -124,6 +124,7 @@ class Workbook:
             "<style type='text/css'>" +
             ".exercise {background-color: yellow; color: black; font-family: 'serif'; font-size: 1.2em}" +
             ".exercise code {font-size: 0.7em}" +
+            "p a > code {color: #0000EE !important; } p a:visited > code {color: #551A8B !important; }" +
             "</style>" + 
             "<h4>✅ Your notebook is ready to go!</h4>" +
             ("This notebook is not running in JupyterLite: you may need to install tskit, tszip, etc."
