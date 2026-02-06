@@ -1,1 +1,5 @@
 env
+.DS_Store
+content/.ipynb_checkpoints
+content/__pycache__
+content/.jupyter
