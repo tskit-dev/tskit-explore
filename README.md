@@ -4,6 +4,10 @@ This is the source repository for notebooks hosted at
 
 https://tskit.dev/explore/
 
+Individual notebooks can be linked using their name, e.g.
+
+https://tskit.dev/explore/lab/?path=tskit.ipynb
+
 These notebooks run JupyterLite as a static site, with compiled versions of the lastest versions of tskit and msprime. They therefore provide pyodide access to the most recent released versions of these libraries. Notebooks can be used in any modern browser:
 
 - How-to Guides: https://jupyterlite.readthedocs.io/en/latest/howto/index.html
