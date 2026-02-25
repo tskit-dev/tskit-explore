@@ -8,7 +8,17 @@ Individual notebooks can be linked using their name, e.g.
 
 https://tskit.dev/explore/lab/?path=tskit.ipynb
 
-These notebooks run JupyterLite as a static site, with compiled versions of the lastest versions of tskit and msprime. They therefore provide pyodide access to the most recent released versions of these libraries. Notebooks can be used in any modern browser:
+These notebooks run JupyterLite as a static site, with compiled versions of the latest
+versions of tskit and msprime as listed on the
+[pyodide recipes repository](https://github.com/pyodide/pyodide-recipes/).
+They therefore provide pyodide access to recent tskit-ecosystem packages, which
+can be loaded simply using e.g. `import tskit`.
+This only applies to python packages that have C components. Pure python packages
+(such as pyslim) can be loaded in pyodide using _micropip_, e.g. via
+`await micropip.install("pyslim")` (which will load the most recent version on PyPI).
+Note, however, that packages relying on [numba](https://numba.pydata.org) will not yet run on pyodide.
+
+Notebooks can be used in any modern browser:
 
 - How-to Guides: https://jupyterlite.readthedocs.io/en/latest/howto/index.html
 - Reference: https://jupyterlite.readthedocs.io/en/latest/reference/index.html
