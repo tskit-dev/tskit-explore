@@ -6,7 +6,7 @@
         // "jupyterlab-kernel-spy",
         "@jupyterlab/launcher",
         "@jupyterlab/launcher-extension",
-        "@jupyterlab/launcher-extension:plugin"
+        "@jupyterlab/launcher-extension:plugin",
         "@jupyterlab/application-extension:logo"
       ]
     }
