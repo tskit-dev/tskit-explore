@@ -9,6 +9,7 @@ from nbclient import NotebookClient
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 PYODIDE_LOCK = DIST / "static" / "pyodide" / "pyodide-lock.json"
+JUPYTER_LITE_CONFIG = DIST / "jupyter-lite.json"
 
 
 def test_pyodide_world_contains_expected_packages():
@@ -38,6 +39,16 @@ def test_pyodide_lock_package_files_are_present():
     file_name = package.get("file_name")
     if file_name is not None:
       assert (pyodide_dir / file_name).exists(), f"{file_name} missing from Pyodide runtime"
+
+
+def test_configured_pyodide_module_exists():
+  config = json.loads(JUPYTER_LITE_CONFIG.read_text(encoding="utf8"))
+  settings = config["jupyter-config-data"]["litePluginSettings"][
+    "@jupyterlite/pyodide-kernel-extension:kernel"
+  ]
+  pyodide_url = settings["pyodideUrl"]
+  assert pyodide_url.endswith(".mjs")
+  assert (DIST / pyodide_url.removeprefix("./")).exists()
 
 
 def _execute_notebook(notebook_path: Path, *, cells: int | None = None, timeout: int = 600) -> None:
