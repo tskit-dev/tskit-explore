@@ -19,6 +19,27 @@ def test_pyodide_world_contains_expected_packages():
     assert name in packages, f"{name} missing from pyodide-lock.json"
 
 
+def test_pyodide_module_runtime_artifacts_are_present():
+  pyodide_dir = PYODIDE_LOCK.parent
+  for name in [
+    "pyodide.mjs",
+    "pyodide.asm.mjs",
+    "pyodide.asm.wasm",
+    "python_stdlib.zip",
+    "pyodide-lock.json",
+  ]:
+    assert (pyodide_dir / name).exists(), f"{name} missing from Pyodide runtime"
+
+
+def test_pyodide_lock_package_files_are_present():
+  pyodide_dir = PYODIDE_LOCK.parent
+  data = json.loads(PYODIDE_LOCK.read_text(encoding="utf8"))
+  for package in data["packages"].values():
+    file_name = package.get("file_name")
+    if file_name is not None:
+      assert (pyodide_dir / file_name).exists(), f"{file_name} missing from Pyodide runtime"
+
+
 def _execute_notebook(notebook_path: Path, *, cells: int | None = None, timeout: int = 600) -> None:
   """Execute a notebook using the local CPython kernel.
 
