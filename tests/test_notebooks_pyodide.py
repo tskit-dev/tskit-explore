@@ -25,6 +25,18 @@ def _execute_notebook(notebook_path: Path, *, cells: int | None = None, timeout:
   If `cells` is provided, only the first `cells` code cells are executed.
   """
   nb = nbformat.read(notebook_path, as_version=4)
+  for cell in nb.cells:
+    if cell.cell_type == "code":
+      cell.source = cell.source.replace('"/drive/', f'"{notebook_path.parent}/')
+      cell.source = cell.source.replace(
+        "from pyodide.http import pyfetch",
+        "from pathlib import Path",
+      )
+      cell.source = cell.source.replace(
+        'response = await pyfetch("/files/data/demo.trees")\n'
+        "ts = tskit.load(io.BytesIO(await response.bytes()))",
+        'ts = tskit.load(Path("data/demo.trees"))',
+      )
 
   if cells is not None:
     code_cells = [c for c in nb.cells if c.cell_type == "code"]

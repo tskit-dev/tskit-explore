@@ -20,6 +20,8 @@ TARGET_PYODIDE_DIR="${THIS_REPO_ROOT}/static/pyodide"
 PYODIDE_RECIPES_DIR="${PYODIDE_RECIPES_DIR:-${THIS_REPO_ROOT}/_pyodide-recipes}"
 CUSTOM_RECIPES_DIR="${THIS_REPO_ROOT}/pyodide-custom-recipes"
 PYODIDE_ENV_NAME="${PYODIDE_ENV_NAME:-pyodide-env}"
+CONDA_ENVS_PATH="${CONDA_ENVS_PATH:-${THIS_REPO_ROOT}/.conda-envs}"
+export CONDA_ENVS_PATH
 
 # By default we only ask pyodide-build to build the packages needed for
 # the sc2ts / tskit stack:
@@ -41,6 +43,7 @@ echo "Repo root           : ${THIS_REPO_ROOT}"
 echo "Target pyodide dir  : ${TARGET_PYODIDE_DIR}"
 echo "pyodide-recipes dir : ${PYODIDE_RECIPES_DIR}"
 echo "Conda env name      : ${PYODIDE_ENV_NAME}"
+echo "Conda envs path     : ${CONDA_ENVS_PATH}"
 echo "Recipe targets      : ${PYODIDE_RECIPES_TARGETS}"
 echo
 
@@ -113,7 +116,7 @@ pyodide xbuildenv install
 
 echo
 echo "=== Installing and configuring Emscripten SDK ==="
-python tools/install_and_patch_emscripten.py
+pyodide xbuildenv install-emscripten
 
 echo
 echo "=== Building recipes: ${PYODIDE_RECIPES_TARGETS} ==="

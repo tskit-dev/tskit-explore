@@ -1,16 +1,15 @@
 package:
   name: humanize
-  version: 4.14.0
+  version: 4.15.0
   top-level:
     - humanize
 
 source:
-  url: https://files.pythonhosted.org/packages/c3/5b/9512c5fb6c8218332b530f13500c6ff5f3ce3342f35e0dd7be9ac3856fd3/humanize-4.14.0-py3-none-any.whl
-  sha256: d57701248d040ad456092820e6fde56c930f17749956ac47f4f655c0c547bfff
+  url: https://files.pythonhosted.org/packages/c5/7b/bca5613a0c3b542420cf92bd5e5fb8ebd5435ce1011a091f66bb7693285e/humanize-4.15.0-py3-none-any.whl
+  sha256: b1186eb9f5a9749cd9cb8565aee77919dd7c8d076161cf44d70e59e3301e1769
 
 about:
   home: https://github.com/python-humanize/humanize
   PyPI: https://pypi.org/project/humanize
   summary: Python humanize utilities
   license: MIT
-
