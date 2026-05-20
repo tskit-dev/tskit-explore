@@ -170,6 +170,7 @@ keep_names.update(
         "pyodide.js",
         "pyodide.mjs",
         "pyodide.asm.js",
+        "pyodide.asm.mjs",
         "pyodide.asm.wasm",
         "python_stdlib.zip",
         "pyodide-lock.json",
