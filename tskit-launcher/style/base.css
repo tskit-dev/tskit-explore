@@ -27,7 +27,7 @@
   color: var(--jp-ui-font-color0);
   font-size: 24px;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
   text-align: center;
 }
 
@@ -55,7 +55,7 @@
   border-color: var(--jp-brand-color1);
   background: var(--jp-layout-color2);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
 }
 
 .jp-LauncherCard-icon {
@@ -74,28 +74,30 @@
 .tskit-launcher {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   min-height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .tskit-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   padding: 30px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
   border-top: 4px solid #204e66;
 }
 
 .tskit-logo {
-  height: 80px;
-  margin-bottom: 20px;
+  height: 60px;
+  margin-bottom: 10px;
 }
 
 .tskit-header h1 {
   color: #204e66;
   font-size: 2.5rem;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   font-weight: 700;
 }
 
@@ -117,9 +119,11 @@
   border: 2px solid #e9ecef;
   border-radius: 12px;
   padding: 25px;
-  transition: all 0.3s ease;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
   width: 100%;
   max-width: 600px;
   min-height: 80px;
@@ -133,7 +137,7 @@
 .tskit-card:hover {
   border-color: #5dc694;
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(93, 198, 148, 0.2);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 .tskit-card .jp-LauncherCard-icon {
@@ -170,7 +174,6 @@
   text-align: left;
   line-height: 1.4;
   margin: 0;
-  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
@@ -181,12 +184,12 @@
   flex-wrap: wrap;
 }
 
-[data-jp-item-name="new-launcher"] {
-    display: none !important;
+[data-jp-item-name='new-launcher'] {
+  display: none !important;
 }
 
 .lm-TabBar-addButton {
-    display: none !important;
+  display: none !important;
 }
 
 .tskit-update-warning {
@@ -195,7 +198,7 @@
   border-radius: 8px;
   margin-bottom: 20px;
   padding: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .tskit-warning-content {
@@ -219,7 +222,7 @@
 }
 
 .tskit-warning-text p {
-  margin: 4px 0 0 0;
+  margin: 4px 0 0;
   color: #856404;
   font-size: 13px;
 }
@@ -234,7 +237,7 @@
   font-size: 13px;
   font-weight: 600;
   transition: all 0.2s ease;
-  box-shadow: 0 3px 8px rgba(32, 78, 102, 0.3);
+  box-shadow: 0 3px 8px rgb(32 78 102 / 30%);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
@@ -248,14 +251,19 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 20%),
+    transparent
+  );
   transition: left 0.5s;
 }
 
 .tskit-reset-button:hover {
   background: linear-gradient(135deg, #1a3d52 0%, #204e66 100%);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(32, 78, 102, 0.4);
+  box-shadow: 0 5px 15px rgb(32 78 102 / 40%);
 }
 
 .tskit-reset-button:hover::before {
@@ -263,36 +271,6 @@
 }
 
 .tskit-reset-button:active {
-  transform: translateY(0px);
-  box-shadow: 0 2px 5px rgba(32, 78, 102, 0.3);
-}
-
-.tskit-launcher {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.tskit-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.tskit-logo {
-  height: 60px;
-  margin-bottom: 10px;
-}
-
-.tskit-card {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.tskit-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.tskit-card-content {
-  flex-grow: 1;
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgb(32 78 102 / 30%);
 }

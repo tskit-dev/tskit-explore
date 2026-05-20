@@ -10,7 +10,7 @@ import { ILauncher } from '@jupyterlab/launcher';
 /**
  * Configuration for content hash checking
  */
-interface ContentConfig {
+interface IContentConfig {
   contentHash: string;
   lastUpdated: string;
   version?: string;
@@ -21,9 +21,12 @@ interface ContentConfig {
  */
 class CustomLauncher extends Widget implements ILauncher {
   private app: JupyterFrontEnd | null = null;
-  private contentConfig: ContentConfig | null = null;
+  private contentConfig: IContentConfig | null = null;
   private readonly STORAGE_KEY = 'tskit-launcher-content-hash';
-  private readonly CONFIG_URL = './content-config.json'; 
+  private readonly AUTO_RESET_KEY = 'tskit-launcher-auto-reset-content-hash';
+  private readonly UI_STATE_VERSION_KEY = 'tskit-launcher-ui-state-version';
+  private readonly UI_STATE_VERSION = 'pyodide-2026-0';
+  private readonly CONFIG_URL = './content-config.json';
 
   constructor() {
     super();
@@ -119,8 +122,8 @@ class CustomLauncher extends Widget implements ILauncher {
 
     const resetButton = this.node.querySelector('#reset-button');
     if (resetButton) {
-      resetButton.addEventListener('click', () => {
-        this.resetLocalState();
+      resetButton.addEventListener('click', async () => {
+        await this.resetLocalState();
       });
     }
   }
@@ -135,13 +138,27 @@ class CustomLauncher extends Widget implements ILauncher {
       }
 
       this.contentConfig = await response.json();
-      
+
+      if (this.shouldResetUiStateForVersion()) {
+        await this.resetUiState(this.UI_STATE_VERSION);
+        return;
+      }
+
       // Get stored hash from localStorage
       const storedData = localStorage.getItem(this.STORAGE_KEY);
       const storedConfig = storedData ? JSON.parse(storedData) : null;
 
       // Check if content has been updated
-      if (this.contentConfig && storedConfig && storedConfig.contentHash !== this.contentConfig.contentHash) {
+      if (
+        this.contentConfig &&
+        storedConfig &&
+        storedConfig.contentHash !== this.contentConfig.contentHash
+      ) {
+        if (this.shouldAutoResetUiState(this.contentConfig.contentHash)) {
+          await this.resetUiState(this.contentConfig.contentHash);
+          return;
+        }
+
         this.showUpdateWarning();
       } else if (!storedConfig) {
         // First time visit - store the current hash
@@ -152,8 +169,20 @@ class CustomLauncher extends Widget implements ILauncher {
     }
   }
 
+  private shouldResetUiStateForVersion(): boolean {
+    return (
+      localStorage.getItem(this.UI_STATE_VERSION_KEY) !== this.UI_STATE_VERSION
+    );
+  }
+
+  private shouldAutoResetUiState(resetMarker: string): boolean {
+    return sessionStorage.getItem(this.AUTO_RESET_KEY) !== resetMarker;
+  }
+
   private showUpdateWarning(): void {
-    const warningElement = this.node.querySelector('#update-warning') as HTMLElement;
+    const warningElement = this.node.querySelector(
+      '#update-warning'
+    ) as HTMLElement;
     if (warningElement) {
       warningElement.style.display = 'block';
     }
@@ -161,18 +190,35 @@ class CustomLauncher extends Widget implements ILauncher {
 
   private storeCurrentHash(): void {
     if (this.contentConfig) {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.contentConfig));
+      localStorage.setItem(
+        this.STORAGE_KEY,
+        JSON.stringify(this.contentConfig)
+      );
     }
   }
 
-  private resetLocalState(): void {
+  private async resetUiState(resetMarker: string): Promise<void> {
+    if (!this.contentConfig) {
+      return;
+    }
+
+    sessionStorage.setItem(this.AUTO_RESET_KEY, resetMarker);
+
+    this.clearJupyterLiteLocalStorage();
+    await this.deleteIndexedDBDatabases(['JupyterLite Storage']);
+    this.storeCurrentHash();
+    localStorage.setItem(this.UI_STATE_VERSION_KEY, this.UI_STATE_VERSION);
+    window.location.reload();
+  }
+
+  private async resetLocalState(): Promise<void> {
     try {
       // Clear JupyterLite state
-      this.clearJupyterLiteState();
-      
+      await this.clearJupyterLiteState();
+
       // Update stored hash
       this.storeCurrentHash();
-      
+
       // Force refresh
       window.location.reload();
     } catch (error) {
@@ -182,19 +228,31 @@ class CustomLauncher extends Widget implements ILauncher {
     }
   }
 
-  private clearJupyterLiteState(): void {
+  private async clearJupyterLiteState(): Promise<void> {
+    this.clearJupyterLiteLocalStorage();
+    await this.clearJupyterLiteIndexedDBDatabases();
+    await this.clearJupyterLiteCaches();
+    await this.unregisterJupyterLiteServiceWorkers();
+  }
+
+  private clearJupyterLiteLocalStorage(): void {
     // Clear JupyterLite-specific localStorage items
     const keysToRemove: string[] = [];
-    
+
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && (
-        key.startsWith('jupyter-') || 
-        key.startsWith('jupyterlab-') ||
-        key.startsWith('lumino-') ||
-        key.includes('notebook') ||
-        key.includes('kernel')
-      )) {
+      if (
+        key &&
+        (key.startsWith('jupyter-') ||
+          key.startsWith('jupyterlab-') ||
+          key.startsWith('lumino-') ||
+          key.startsWith('@jupyterlab/') ||
+          key.startsWith('@jupyterlite/') ||
+          key.includes('filebrowser') ||
+          key.includes('notebook') ||
+          key.includes('kernel') ||
+          key.includes('workspace'))
+      ) {
         keysToRemove.push(key);
       }
     }
@@ -202,26 +260,91 @@ class CustomLauncher extends Widget implements ILauncher {
     keysToRemove.forEach(key => {
       localStorage.removeItem(key);
     });
-
-    // Clear IndexedDB databases used by JupyterLite
-    this.clearIndexedDBDatabases();
   }
 
-  private clearIndexedDBDatabases(): void {
-    // Common JupyterLite IndexedDB database names
-    const dbNames = [
+  private async clearJupyterLiteIndexedDBDatabases(): Promise<void> {
+    const knownDbNames = [
       'JupyterLite Storage',
+      'JupyterLite Contents',
       'jupyter-config-data',
       'jupyter-lab-workspaces',
       'pyodide-packages'
     ];
 
-    dbNames.forEach(dbName => {
-      const deleteRequest = indexedDB.deleteDatabase(dbName);
-      deleteRequest.onerror = () => {
-        console.warn(`Could not delete database: ${dbName}`);
-      };
-    });
+    const dbNames = new Set(knownDbNames);
+    const indexedDBWithDatabases = indexedDB as IDBFactory & {
+      databases?: () => Promise<Array<{ name?: string }>>;
+    };
+
+    if (indexedDBWithDatabases.databases) {
+      const databases = await indexedDBWithDatabases.databases();
+      for (const database of databases) {
+        const name = database.name;
+        if (name && this.isJupyterLiteDatabase(name)) {
+          dbNames.add(name);
+        }
+      }
+    }
+
+    await this.deleteIndexedDBDatabases([...dbNames]);
+  }
+
+  private isJupyterLiteDatabase(name: string): boolean {
+    return (
+      name.startsWith('JupyterLite') ||
+      name.startsWith('jupyter') ||
+      name.startsWith('pyodide')
+    );
+  }
+
+  private async deleteIndexedDBDatabases(dbNames: string[]): Promise<void> {
+    await Promise.all(
+      dbNames.map(
+        dbName =>
+          new Promise<void>(resolve => {
+            const deleteRequest = indexedDB.deleteDatabase(dbName);
+            deleteRequest.onsuccess = () => resolve();
+            deleteRequest.onerror = () => {
+              console.warn(`Could not delete database: ${dbName}`);
+              resolve();
+            };
+            deleteRequest.onblocked = () => {
+              console.warn(`Database deletion blocked: ${dbName}`);
+              resolve();
+            };
+          })
+      )
+    );
+  }
+
+  private async clearJupyterLiteCaches(): Promise<void> {
+    if (!('caches' in window)) {
+      return;
+    }
+
+    const cacheNames = await caches.keys();
+    await Promise.all(
+      cacheNames
+        .filter(
+          cacheName => cacheName.includes('jupyter') || cacheName === 'precache'
+        )
+        .map(cacheName => caches.delete(cacheName))
+    );
+  }
+
+  private async unregisterJupyterLiteServiceWorkers(): Promise<void> {
+    if (!navigator.serviceWorker) {
+      return;
+    }
+
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(
+      registrations
+        .filter(registration =>
+          registration.active?.scriptURL.includes(location.origin)
+        )
+        .map(registration => registration.unregister())
+    );
   }
 
   setApp(app: JupyterFrontEnd): void {
