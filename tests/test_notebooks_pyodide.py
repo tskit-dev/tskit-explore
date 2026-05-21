@@ -51,6 +51,17 @@ def test_configured_pyodide_module_exists():
   assert (DIST / pyodide_url.removeprefix("./")).exists()
 
 
+def test_pyodide_kernel_uses_native_dynamic_import():
+  extension_dir = DIST / "extensions" / "@jupyterlite" / "pyodide-kernel-extension" / "static"
+  js_files = list(extension_dir.glob("*.js"))
+  assert js_files
+  bundle_source = "\n".join(path.read_text(encoding="utf8") for path in js_files)
+  assert ".endsWith(\".mjs\")?t=(await import(" in bundle_source
+  assert "(476)(r)).loadPyodide" not in bundle_source
+  assert "(476)(n)).loadPyodide" not in bundle_source
+  assert "(476)(s)).loadPyodide" not in bundle_source
+
+
 def _execute_notebook(notebook_path: Path, *, cells: int | None = None, timeout: int = 600) -> None:
   """Execute a notebook using the local CPython kernel.
 
