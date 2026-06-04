@@ -25,7 +25,7 @@ class CustomLauncher extends Widget implements ILauncher {
   private readonly STORAGE_KEY = 'tskit-launcher-content-hash';
   private readonly AUTO_RESET_KEY = 'tskit-launcher-auto-reset-content-hash';
   private readonly UI_STATE_VERSION_KEY = 'tskit-launcher-ui-state-version';
-  private readonly UI_STATE_VERSION = 'pyodide-2026-0';
+  private readonly UI_STATE_VERSION = 'pyodide-2026-0-native-import';
   private readonly CONFIG_URL = './content-config.json';
 
   constructor() {
@@ -204,8 +204,7 @@ class CustomLauncher extends Widget implements ILauncher {
 
     sessionStorage.setItem(this.AUTO_RESET_KEY, resetMarker);
 
-    this.clearJupyterLiteLocalStorage();
-    await this.deleteIndexedDBDatabases(['JupyterLite Storage']);
+    await this.clearJupyterLiteState();
     this.storeCurrentHash();
     localStorage.setItem(this.UI_STATE_VERSION_KEY, this.UI_STATE_VERSION);
     window.location.reload();
