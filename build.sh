@@ -48,6 +48,49 @@ for path in kernel_extension_dir.glob("*.js"):
 if not patched_files:
     raise SystemExit("No Pyodide dynamic import bundle entry was patched")
 PY
-find content/ -type f -exec cat {} \; | sha256sum | cut -d' ' -f1 > content-hash.txt
+python3 - <<'PY'
+import hashlib
+from pathlib import Path
+
+paths = []
+for root in [
+    Path("content"),
+    Path("pyodide-custom-recipes"),
+    Path("repl"),
+    Path("tskit-launcher/src"),
+    Path("tskit-launcher/style"),
+]:
+    if root.exists():
+        paths.extend(path for path in root.rglob("*") if path.is_file())
+
+for path in [
+    Path("build.sh"),
+    Path("build_pyodide_world.sh"),
+    Path("jupyter-lite.json"),
+    Path("requirements.txt"),
+    Path("tskit-launcher/package.json"),
+    Path("tskit-launcher/package-lock.json"),
+    Path("dist/jupyter-lite.json"),
+    Path("dist/static/pyodide/pyodide-lock.json"),
+    Path("dist/static/pyodide/pyodide.asm.mjs"),
+    Path("dist/static/pyodide/pyodide.asm.wasm"),
+    Path("dist/static/pyodide/python_stdlib.zip"),
+]:
+    if path.exists():
+        paths.append(path)
+
+pyodide_dir = Path("dist/static/pyodide")
+if pyodide_dir.exists():
+    paths.extend(pyodide_dir.glob("pyodide*.mjs"))
+
+digest = hashlib.sha256()
+for path in sorted(set(paths)):
+    digest.update(path.as_posix().encode())
+    digest.update(b"\0")
+    digest.update(path.read_bytes())
+    digest.update(b"\0")
+
+Path("content-hash.txt").write_text(digest.hexdigest() + "\n")
+PY
 HASH=$(cat content-hash.txt)
 echo "{\"contentHash\":\"$HASH\",\"lastUpdated\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > dist/lab/content-config.json
