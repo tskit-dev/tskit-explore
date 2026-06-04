@@ -62,6 +62,15 @@ def test_pyodide_kernel_uses_native_dynamic_import():
   assert "(476)(s)).loadPyodide" not in bundle_source
 
 
+def test_pyodide_kernel_uses_module_workers():
+  extension_dir = DIST / "extensions" / "@jupyterlite" / "pyodide-kernel-extension" / "static"
+  js_files = list(extension_dir.glob("*.js"))
+  assert js_files
+  bundle_source = "\n".join(path.read_text(encoding="utf8") for path in js_files)
+  assert '{type:"module"}' in bundle_source
+  assert "{type:void 0}" not in bundle_source
+
+
 def _execute_notebook(notebook_path: Path, *, cells: int | None = None, timeout: int = 600) -> None:
   """Execute a notebook using the local CPython kernel.
 
