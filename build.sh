@@ -37,22 +37,36 @@ kernel_extension_dir = Path(
 load_pyodide_pattern = re.compile(
     r"\(await ([A-Za-z_$][\w$]*|__webpack_require__)\(476\)\(([A-Za-z_$][\w$]*)\)\)\.loadPyodide"
 )
+dynamic_import_patched_files = []
 patched_files = []
 worker_type_patched_files = []
+sqlite_bootstrap_patched_files = []
 for path in kernel_extension_dir.glob("*.js"):
     source = path.read_text()
     patched = load_pyodide_pattern.sub(r"(await import(\2)).loadPyodide", source)
+    if patched != source:
+        dynamic_import_patched_files.append(path.name)
+    before_worker_patch = patched
     patched = patched.replace("{type:void 0}", '{type:"module"}')
+    if "{type:void 0}" in before_worker_patch and '{type:"module"}' in patched:
+        worker_type_patched_files.append(path.name)
+    before_sqlite_patch = patched
+    patched = patched.replace(
+        '["sqlite3","ipykernel","comm","pyodide_kernel","jedi","ipython"]',
+        '["ipykernel","comm","pyodide_kernel","jedi","ipython"]',
+    )
+    if '"sqlite3","ipykernel"' in before_sqlite_patch and '"sqlite3","ipykernel"' not in patched:
+        sqlite_bootstrap_patched_files.append(path.name)
     if patched != source:
         path.write_text(patched)
         patched_files.append(path.name)
-    if "{type:void 0}" in source and '{type:"module"}' in patched:
-        worker_type_patched_files.append(path.name)
 
-if not patched_files:
+if not dynamic_import_patched_files:
     raise SystemExit("No Pyodide dynamic import bundle entry was patched")
 if not worker_type_patched_files:
     raise SystemExit("No Pyodide worker type entry was patched")
+if not sqlite_bootstrap_patched_files:
+    raise SystemExit("No Pyodide sqlite bootstrap entry was patched")
 PY
 python3 - <<'PY'
 import hashlib
