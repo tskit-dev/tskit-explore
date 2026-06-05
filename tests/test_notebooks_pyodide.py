@@ -1,8 +1,12 @@
 import json
 import os
+import shutil
+import subprocess
+import textwrap
 from pathlib import Path
 
 import nbformat
+import pytest
 from nbclient import NotebookClient
 
 
@@ -69,6 +73,41 @@ def test_pyodide_kernel_uses_module_workers():
   bundle_source = "\n".join(path.read_text(encoding="utf8") for path in js_files)
   assert '{type:"module"}' in bundle_source
   assert "{type:void 0}" not in bundle_source
+
+
+def test_pyodide_kernel_does_not_piplite_install_sqlite3():
+  extension_dir = DIST / "extensions" / "@jupyterlite" / "pyodide-kernel-extension" / "static"
+  js_files = list(extension_dir.glob("*.js"))
+  assert js_files
+  bundle_source = "\n".join(path.read_text(encoding="utf8") for path in js_files)
+  assert '"sqlite3","ipykernel"' not in bundle_source
+  assert '["ipykernel","comm","pyodide_kernel","jedi","ipython"]' in bundle_source
+
+
+def test_pyodide_runtime_imports_sqlite3():
+  if shutil.which("node") is None:
+    pytest.skip("node is required to smoke-test the local Pyodide runtime")
+
+  script = textwrap.dedent(
+    """
+    import { loadPyodide } from './dist/static/pyodide/pyodide.mjs';
+    const pyodide = await loadPyodide({ indexURL: './dist/static/pyodide/' });
+    await pyodide.runPythonAsync(`
+    import sqlite3, _sqlite3
+    assert sqlite3.sqlite_version
+    assert _sqlite3.sqlite_version
+    `);
+    """
+  )
+  result = subprocess.run(
+    ["node", "--input-type=module", "-e", script],
+    cwd=ROOT,
+    capture_output=True,
+    text=True,
+    timeout=60,
+    check=False,
+  )
+  assert result.returncode == 0, result.stdout + result.stderr
 
 
 def _execute_notebook(notebook_path: Path, *, cells: int | None = None, timeout: int = 600) -> None:
